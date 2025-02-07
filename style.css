@@ -7,6 +7,24 @@ body {
     background-color: rgb(14, 14, 14);
 }
 
+.divider {
+    display: flex;
+    align-items: center;
+margin-top: 15px;
+}
+
+.divider hr {
+    flex-grow: 1;
+    color: white
+}
+
+.divider::before {
+    content: attr(data-letter);
+    font-size: 32px;
+    color: white;
+    font-family: arial;
+}
+
 li a{
     color: white;
     font-family:Tahoma;

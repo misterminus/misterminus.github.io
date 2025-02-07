@@ -34,7 +34,7 @@ li a{
 }
 
 .navbar {
-    background-color: rgb(27, 27, 27);
+    background-color: #141617;
     border-radius: 10px;
 }
 
@@ -59,7 +59,7 @@ padding-left: 5px;
 }
 
 .game {
-    background-color: rgb(27, 27, 27);
+    background-color: #141617;
     border-radius: 10px;
     margin-top: 15px;
     align-items: center;

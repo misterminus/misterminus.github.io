@@ -4,11 +4,41 @@ function getip(){
     .catch(() => "nil IP")
 }
 
+let cooldown = false;
+
 async function message() {
+
+    if (cooldown) {
+        button.innerText = "Please wait."
+        button.disabled = true;
+
+        setTimeout(() => {
+            button.innerText = "Send"
+        button.disabled = false;
+        }, 1000); 
+    }
+
     let name = document.getElementById("name").value;
     let content = document.getElementById("content").value;
     let button = document.getElementById("Send");
     let ip = await getip();
+
+    if (!content && !name){
+        alert("Please fill in your name and suggestion.")
+        return;
+    }   
+    if(!content) {
+        alert("Please fill in your suggestion.")
+        return;
+    }
+    if (!name) {
+        alert("Please fill in your name.") 
+        return;
+    }
+
+    cooldown = true;
+    button.innerText = "Sending";
+    button.disabled = true;
 
     fetch("https://japey.bontboss.workers.dev", {
         method: "POST",
@@ -18,16 +48,22 @@ async function message() {
     .then(response => response.json())
     .then(() =>
     {
-        name="";
-        content="";
-
+        
         button.innerText = "Sent!"
-        button.disabled = true;
 
         setTimeout(() => {
             button.innerText = "Send"
-        button.disabled = false;
-        }, 1000);
+            button.disabled = false;
+            cooldown = false;
+        }, 5000);
     }
 )
+
+.catch(() => {
+    alert("Message didn't send, Please try sending it again.")
+    button.innerText = "Send";
+    button.disabled = false;
+    cooldown = false;
+})
+
 }
